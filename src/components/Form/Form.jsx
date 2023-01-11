@@ -8,45 +8,35 @@ const Form = () => {
   const [subject, setSubject] = useState("");
   const { tg } = useTelegram();
 
-  //   const onSendData = useCallback(() => {
-  //     const data = {
-  //       country,
-  //       street,
-  //       subject,
-  //     };
-  //     tg.sendData(JSON.stringify(data));
-  //   }, [country, street, subject]);
-
-  useEffect(() => {
-    tg.MainButton.show();
-  }, []);
-  useEffect(() => {
-    tg.onEvent("mainButtonClicked", "kkkk");
-    return () => {
-      tg.offEvent("mainButtonClicked", "kkkkkkkkkk");
+  const onSendData = useCallback(() => {
+    const data = {
+      country,
+      street,
+      subject,
     };
-  }, ["kkkddd"]);
+    tg.sendData(JSON.stringify(data));
+  }, [country, street, subject]);
 
-  //   useEffect(() => {
-  //     tg.onEvent("mainButtonClicked", onSendData);
-  //     return () => {
-  //       tg.offEvent("mainButtonClicked", onSendData);
-  //     };
-  //   }, [onSendData]);
+  useEffect(() => {
+    tg.onEvent("mainButtonClicked", onSendData);
+    return () => {
+      tg.offEvent("mainButtonClicked", onSendData);
+    };
+  }, [onSendData]);
 
-  //   useEffect(() => {
-  //     tg.MainButton.setParams({
-  //       text: "Send data",
-  //     });
-  //   }, []);
+  useEffect(() => {
+    tg.MainButton.setParams({
+      text: "Send data",
+    });
+  }, []);
 
-  //   useEffect(() => {
-  //     if (!street || !country) {
-  //       tg.MainButton.hide();
-  //     } else {
-  //       tg.MainButton.show();
-  //     }
-  //   }, [country, street]);
+  useEffect(() => {
+    if (!street || !country) {
+      tg.MainButton.hide();
+    } else {
+      tg.MainButton.show();
+    }
+  }, [country, street]);
 
   const onChangeCountry = (e) => {
     setCountry(e.target.value);
@@ -60,7 +50,7 @@ const Form = () => {
 
   return (
     <div className={"form"}>
-      {/* <h3>Input Your data</h3>
+      <h3>Input Your data</h3>
       <input
         className={"input"}
         type="text"
@@ -78,7 +68,7 @@ const Form = () => {
       <select className={"select"} value={subject} onChange={onChangeSubject}>
         <option value={"person"}>person</option>
         <option value={"organization"}>organization</option>
-      </select> */}
+      </select>
     </div>
   );
 };
