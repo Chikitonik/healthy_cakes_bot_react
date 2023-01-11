@@ -17,9 +17,12 @@ const Form = () => {
     tg.sendData(JSON.stringify(data));
   }, [country, street, subject]);
 
+  window.Telegram.WebApp.MainButton.onEvent("click", () => {
+    console.log("MainButton clicked");
+  });
+
   useEffect(() => {
     tg.onEvent("mainButtonClicked", onSendData);
-    tg.onEvent("mainButtonClicked", "onSendData");
     return () => {
       tg.offEvent("mainButtonClicked", onSendData);
     };
