@@ -1,0 +1,21 @@
+// this is after putting script in public\index.html
+const tg = window.Telegram.WebApp;
+
+export function useTelegram() {
+  const onClose = () => {
+    tg.close();
+  };
+  const onToggleButton = () => {
+    if (tg.MainButton.isVisible) {
+      tg.MainButton.hide();
+    } else {
+      tg.MainButton.show();
+    }
+  };
+  return {
+    onClose,
+    onToggleButton,
+    tg,
+    user: tg.tg.initDataUnsafe?.user,
+  };
+}
