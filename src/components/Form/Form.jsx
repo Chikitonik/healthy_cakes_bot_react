@@ -18,17 +18,24 @@ const Form = () => {
   }, [country, street, subject]);
 
   useEffect(() => {
-    tg.onEvent("mainButtonClicked", onSendData);
+    tg.onEvent("mainButtonClicked", "kkkk");
     return () => {
-      tg.offEvent("mainButtonClicked", onSendData);
+      tg.offEvent("mainButtonClicked", "kkkkkkkkkk");
     };
   }, [onSendData]);
 
-  useEffect(() => {
-    tg.MainButton.setParams({
-      text: "Send data",
-    });
-  }, []);
+  //   useEffect(() => {
+  //     tg.onEvent("mainButtonClicked", onSendData);
+  //     return () => {
+  //       tg.offEvent("mainButtonClicked", onSendData);
+  //     };
+  //   }, [onSendData]);
+
+  //   useEffect(() => {
+  //     tg.MainButton.setParams({
+  //       text: "Send data",
+  //     });
+  //   }, []);
 
   useEffect(() => {
     if (!street || !country) {
