@@ -10,6 +10,7 @@ const products = [
     title: "Джинсы",
     price: 5000,
     description: "Синего цвета, прямые",
+    src: "../../assets/images/products/maffins.jpg",
   },
   {
     id: "2",
