@@ -18,6 +18,9 @@ const Form = () => {
   //   }, [country, street, subject]);
 
   useEffect(() => {
+    tg.MainButton.show();
+  }, []);
+  useEffect(() => {
     tg.onEvent("mainButtonClicked", "kkkk");
     return () => {
       tg.offEvent("mainButtonClicked", "kkkkkkkkkk");
