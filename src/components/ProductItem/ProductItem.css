@@ -2,11 +2,9 @@
     display: flex;
     flex-direction: column;
     /* border: 1px solid var(--tg-theme-button-color); */
-    padding: 15px;
+    /* padding: 15px; */
     width: 170px;
 }
-
-
 .img {
     width: 100%;
     /* background: lightgray; */
@@ -23,4 +21,8 @@
 
 .add-btn {
     width: 100%;
+    /* padding: 0 !important; */
+}
+.price {
+    /* line-height:1 !important */
 }

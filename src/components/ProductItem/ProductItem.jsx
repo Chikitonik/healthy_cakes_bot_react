@@ -17,10 +17,10 @@ const ProductItem = ({ product, className, onAdd }) => {
   return (
     <div>
       <Card
-        width="150px"
-        style={{
-          margin: "10px",
-        }}
+        className={"product " + className}
+        // style={{
+        //   margin: "10px",
+        // }}
       >
         <CardMedia
           component="img"
@@ -36,11 +36,16 @@ const ProductItem = ({ product, className, onAdd }) => {
           <Typography variant="body2" color="text.secondary" align="center">
             {product.description}
           </Typography>
-          <Typography variant="h6" component="div" align="center">
-            {product.price + ",00 $"}
+          <Typography
+            className={"price"}
+            variant="h6"
+            component="div"
+            align="center"
+          >
+            {"$ " + product.price}
           </Typography>
         </CardContent>
-        <CardActions>
+        <CardActions style={{ padding: "0" }}>
           {/* <Button size="small">Info</Button> */}
           <Button
             className={`add-btn ${product.isAdded && "added"}`}
