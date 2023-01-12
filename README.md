@@ -1,10 +1,15 @@
-# Getting Started with Create React App
+# Getting Started
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## For test:
 
-## Available Scripts
+start server from repo healthy_cakes_bot_node
+launch ngrok and send `ngrok http 8000`
+copy url and past to:
 
-In the project directory, you can run:
+- BotFather in Telegram
+  --- /setmenubutton
+  --- @healthy_cakes_bot and other settings
+- const webAppUrl in healthy_cakes_bot_node\index.js
 
 ### `npm start`
 

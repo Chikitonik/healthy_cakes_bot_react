@@ -7,10 +7,10 @@ import { useCallback, useEffect } from "react";
 const products = [
   {
     id: "1",
-    title: "Джинсы",
-    price: 5000,
+    title: "Muffins",
+    price: 5500,
     description: "Синего цвета, прямые",
-    src: "../../assets/images/products/maffins.jpg",
+    src: "../../assets/images/products/muffins.jpg",
   },
   // {
   //   id: "2",
