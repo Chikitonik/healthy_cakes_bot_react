@@ -18,10 +18,8 @@ const ProductItem = ({ product, className, onAdd }) => {
     <div className={"product " + className}>
       <div
         className={"img"}
-        // style={{ backgroundImage: `url(${product.src})` }}
-      >
-        <source type="application/x-tgsticker" srcset={product.src}></source>
-      </div>
+        style={{ backgroundImage: `url(${product.src})` }}
+      ></div>
       <div className={"title"}>{product.title}</div>
       <div className={"description"}>{product.description}</div>
       <div className={"price"}>

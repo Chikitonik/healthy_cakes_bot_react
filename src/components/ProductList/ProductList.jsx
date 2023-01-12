@@ -9,8 +9,8 @@ const products = [
     id: "1",
     title: "Muffins",
     price: 5500,
-    description: "Синего цвета, прямые",
-    src: "../../assets/images/products/muffins.jpg",
+    description: "Very tasty!",
+    src: "https://raw.githubusercontent.com/Chikitonik/healthy_cakes_bot_react/main/src/assets/images/products/muffins.jpg",
   },
   // {
   //   id: "2",
