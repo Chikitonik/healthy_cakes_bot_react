@@ -11,6 +11,7 @@
         <li>const <code>webAppUrl</code> in healthy_cakes_bot_<b>node</b>\index.js</li>
         </ul>
     <li>start server from repo healthy_cakes_bot_<b>node</b> (npm start)</li>
+    <li>and change in healthy_cakes_bot_<b>node</b> <code>const [{ token }] = JSON.parse(fs.readFileSync("./botData.json", "utf8"))</code> for token value (file botData.json in gitignore)</li>
 </ul>
 
 <ul><b>For production:</b>
@@ -24,4 +25,6 @@
         <li>const <code>webAppUrl</code> in healthy_cakes_bot_<b>node</b>\index.js</li>
         </ul>
     <li>start server from repo healthy_cakes_bot_<b>node</b> (npm start) or find another server for node.js :)</li>
-</ul>
+    <li>and change in healthy_cakes_bot_<b>node</b> <code>const [{ token }] = JSON.parse(fs.readFileSync("./botData.json", "utf8"))</code> for token value (file botData.json in gitignore)</li
+
+<span>https://core.telegram.org/bots/webapps Web Apps for Bots description</span>
