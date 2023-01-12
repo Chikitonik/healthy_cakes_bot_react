@@ -6,10 +6,10 @@ start server from repo healthy_cakes_bot_node
 launch ngrok and send `ngrok http 8000`
 copy url and past to:
 
-- BotFather in Telegram
-  --- /setmenubutton
-  --- @healthy_cakes_bot and other settings
-- const webAppUrl in healthy_cakes_bot_node\index.js
+<ul>BotFather in Telegram</ul>
+<li>/setmenubutton</li>
+<li>@healthy_cakes_bot and other settings</li>
+const webAppUrl in healthy_cakes_bot_node\index.js
 
 ### `npm start`
 
