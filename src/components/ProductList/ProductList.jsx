@@ -16,7 +16,7 @@ const ProductList = () => {
   // State to keep track of added items
   const [addedItems, setAddedItems] = useState([]);
   // Destructuring telegram object and queryId from custom hook
-  const { tg, queryId } = useTelegram();
+  const { tg, queryId, user } = useTelegram();
   // Use callback hook to send data to the server
   const onSendData = useCallback(() => {
     // Prepare data to be sent
@@ -24,6 +24,7 @@ const ProductList = () => {
       products: addedItems,
       totalPrice: getTotalPrice(addedItems),
       queryId,
+      user: user,
     };
     // Send data to the server
     fetch("http://localhost:8000/web-data", {
@@ -69,7 +70,7 @@ const ProductList = () => {
     } else {
       tg.MainButton.show();
       tg.MainButton.setParams({
-        text: `Buy ${getTotalPrice(newItems)}`,
+        text: `BUY $ ${getTotalPrice(newItems)}`,
       });
     }
   };
