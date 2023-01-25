@@ -1,81 +1,89 @@
 import React from "react";
-import Button from "../Button/Button";
 import "./ProductItem.css";
-// import { Card, CardContent, Typography } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-// import Button from "@mui/material/Button";
+import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import CardActionArea from "@mui/material/CardActionArea";
 
-const ProductItem = ({ product, className, onAdd }) => {
+const ProductItem = ({ product, className, onAdd, onShowDescription }) => {
   const onAddHandler = () => {
     onAdd(product);
   };
 
-  return (
-    <div>
-      <Card
-        className={"product " + className}
-        // style={{
-        //   margin: "10px",
-        // }}
-      >
+  const onShowDescriptionHandler = () => {
+    onShowDescription(product);
+  };
+
+  const ProductData = ({ src, alt, title, price }) => {
+    return (
+      <>
         <CardMedia
           component="img"
           height="150"
           width="150"
-          image={product.src}
-          alt={product.title}
+          image={src}
+          alt={alt}
         />
-        <CardContent style={{ padding: "0" }}>
-          <Typography variant="h6" component="div" align="center">
-            {product.title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary" align="center">
-            {product.description}
-          </Typography>
-          <Typography
-            className={"price"}
-            variant="h6"
-            component="div"
-            align="center"
-          >
-            {"$ " + product.price}
-          </Typography>
-        </CardContent>
-        <CardActions style={{ padding: "0" }}>
-          {/* <Button size="small">Info</Button> */}
+        <Typography
+          className={"title"}
+          variant="h6"
+          component="div"
+          align="center"
+        >
+          {title}
+        </Typography>
+        <Typography
+          className={"price"}
+          variant="h6"
+          component="div"
+          align="center"
+        >
+          {"$ " + price}
+        </Typography>
+      </>
+    );
+  };
+
+  const ProductDescription = ({ description }) => {
+    return (
+      <Typography
+        className={"description"}
+        variant="body1"
+        component="div"
+        align="center"
+      >
+        {description}
+      </Typography>
+    );
+  };
+
+  return (
+    <Card className={"product " + className}>
+      <CardActionArea onClick={onShowDescriptionHandler}>
+        {product.isShowDescription ? (
+          <ProductDescription description={product.description} />
+        ) : (
+          <ProductData
+            src={product.src}
+            alt={product.title}
+            title={product.title}
+            price={product.price}
+          />
+        )}
+      </CardActionArea>
+      <CardActions className={"card-actions"} style={{ padding: "0" }}>
+        {!product.isShowDescription && (
           <Button
             className={`add-btn ${product.isAdded && "added"}`}
             onClick={onAddHandler}
           >
             {product.isAdded ? "REMOVE" : "ADD TO CART"}
           </Button>
-        </CardActions>
-      </Card>
-    </div>
-
-    // <div className={"product " + className}>
-    //   <div
-    //     className={"img"}
-    //     style={{ backgroundImage: `url(${product.src})` }}
-    //   ></div>
-    //   <div className={"title"}>{product.title}</div>
-    //   <div className={"description"}>{product.description}</div>
-    //   <div className={"price"}>
-    //     <span>
-    //       Cost: <b>{product.price}</b>
-    //     </span>
-    //   </div>
-    //   <Button
-    //     className={`add-btn ${product.isAdded && "added"}`}
-    //     onClick={onAddHandler}
-    //   >
-    //     {product.isAdded ? "REMOVE" : "ADD TO CART"}
-    //   </Button>
-    // </div>
+        )}
+      </CardActions>
+    </Card>
   );
 };
 

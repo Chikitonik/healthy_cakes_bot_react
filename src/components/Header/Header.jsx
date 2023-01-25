@@ -10,9 +10,10 @@ const Header = () => {
     <div className={"header"}>
       {/* <Button onClick={onClose}>Close</Button> */}
       {/* <span className={"username"}>{user?.username}</span> */}
-      <Typography variant="h6" component="div" align="center">
+      <Typography variant="h6" component="div">
         Choose what You want to buy
       </Typography>
+      <Typography variant="p"> (tap for description)</Typography>
     </div>
   );
 };

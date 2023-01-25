@@ -22,7 +22,7 @@ const ProductList = () => {
     // Prepare data to be sent
     const data = {
       products: addedItems,
-      totalPrice: getTotalPrice(addedItems),
+      totalPrice: Math.round(getTotalPrice(addedItems) * 100) / 100,
       queryId,
       user: user,
     };
@@ -70,15 +70,31 @@ const ProductList = () => {
     } else {
       tg.MainButton.show();
       tg.MainButton.setParams({
-        text: `BUY $ ${getTotalPrice(newItems)}`,
+        text: `BUY $ ${Math.round(getTotalPrice(newItems) * 100) / 100}`,
       });
     }
+  };
+  const onShowDescription = (product) => {
+    const itemToUpdateInData = products_data.find(
+      (item) => item.id === product.id
+    );
+    itemToUpdateInData.isShowDescription
+      ? (itemToUpdateInData.isShowDescription = false)
+      : (itemToUpdateInData.isShowDescription = true);
+    // Update the state
+    let someMyListToUpdateTheState = [];
+    setAddedItems(someMyListToUpdateTheState);
   };
   // Render the list of products
   return (
     <div className={"list"}>
       {products_data.map((item) => (
-        <ProductItem product={item} onAdd={onAdd} className={"item"} />
+        <ProductItem
+          product={item}
+          onAdd={onAdd}
+          onShowDescription={onShowDescription}
+          className={"item"}
+        />
       ))}
     </div>
   );
