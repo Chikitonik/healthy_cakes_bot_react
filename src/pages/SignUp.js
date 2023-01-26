@@ -17,11 +17,16 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
+import md5 from "md5";
 
-import { useRef, useState, useEffect } from "react";
+import {
+  // useRef,
+  useState,
+  useEffect,
+} from "react";
 import axios from "axios";
 
-import urls from "../../data/urls";
+import urls from "../data/urls";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -41,8 +46,8 @@ export default function SignUp() {
     event.preventDefault();
   };
 
-  const userRef = useRef();
-  const errRef = useRef();
+  // const userRef = useRef();
+  // const errRef = useRef();
 
   const [user, setUser] = useState("");
   const [validName, setValidName] = useState(false);
@@ -59,9 +64,9 @@ export default function SignUp() {
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
 
-  useEffect(() => {
-    userRef.current.focus();
-  }, []);
+  // useEffect(() => {
+  //   userRef.current.focus();
+  // }, []);
 
   useEffect(() => {
     setValidName(USER_REGEX.test(user));
@@ -82,6 +87,7 @@ export default function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const md5Pwd = md5(pwd);
     // if button enabled with JS hack
     const v1 = USER_REGEX.test(user);
     const v2 = EMAIL_REGEX.test(email);
@@ -93,7 +99,7 @@ export default function SignUp() {
     try {
       const response = await axios.post(
         REGISTER_URL,
-        JSON.stringify({ user, email, pwd }),
+        JSON.stringify({ user, email, md5Pwd }),
         {
           headers: { "Content-Type": "application/json" },
           // withCredentials: true,
@@ -113,11 +119,18 @@ export default function SignUp() {
       if (!err?.response) {
         setErrMsg("No Server Response");
       } else if (err.response?.status === 409) {
-        setErrMsg("Username Taken");
+        setErrMsg("Username already Taken");
       } else if (err.response?.status === 500) {
         console.log(
-          "err.response.data.error.detai :>> ",
+          "err.response.data.error.detail :>> ",
           err.response.data.error.detail
+        );
+        console.log("err.response.data.error :>> ", err.response.data.error);
+        setErrMsg(
+          err.response.data.error.detail.replace(
+            /Key \((\w+)\)=\((.+)\) (.*)/,
+            "$1: $2 $3"
+          )
         );
       } else {
         setErrMsg("Registration Failed");
@@ -163,7 +176,7 @@ export default function SignUp() {
                     disableHoverListener
                     title={
                       !validName &&
-                      "4 to 24 characters. Must begin with a letter. Letters, numbers, underscores, hyphens allowed."
+                      "4 to 24 lowercase characters. Must begin with a letter. Letters, numbers, underscores, hyphens allowed."
                     }
                     placement="bottom-start"
                   >
@@ -171,8 +184,8 @@ export default function SignUp() {
                       name="username"
                       fullWidth
                       id="username"
-                      ref={userRef}
-                      onChange={(e) => setUser(e.target.value)}
+                      // ref={userRef}
+                      onChange={(e) => setUser(e.target.value.toLowerCase())}
                       value={user}
                       label={
                         <label>

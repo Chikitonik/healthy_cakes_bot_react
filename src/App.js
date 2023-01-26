@@ -5,7 +5,18 @@ import { useTelegram } from "./hooks/useTelegram";
 import { Route, Routes } from "react-router-dom";
 import ProductList from "./components/ProductList/ProductList";
 import Form from "./components/Form/Form";
-import SignUp from "./components/Register/SignUp";
+import SignUp from "./pages/SignUp";
+import SignIn from "./pages/SignIn";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Admin from "./pages/Admin";
+import LinkPage from "./pages/LinkPage";
+import Missing from "./pages/LinkPage";
+import Layout from "./components/Layout/Layout";
+import RequireAuth from "./components/Auth/RequierAuth";
+import Unauthorized from "./components/Auth/Unauthorized";
+import { ROLES } from "./data/roles";
+import { Outlet } from "react-router-dom";
 
 function App() {
   const { onToggleButton, tg } = useTelegram();
@@ -13,15 +24,47 @@ function App() {
     tg.ready();
   }, []);
 
+  //   return (
+  //       {/* <Header />
+  //       <Routes>
+  //         <Route index element={<ProductList />} />
+  //         <Route path={"form"} element={<Form />} />
+  //       </Routes> */}
+  //   {/* <SignUp /><SignIn /> */}
+  //   )
+  // }
   return (
-    <div className="App">
-      {/* <Header />
-      <Routes>
-        <Route index element={<ProductList />} />
-        <Route path={"form"} element={<Form />} />
-      </Routes> */}
-      <SignUp />
-    </div>
+    <Routes>
+      {/* <Route path="/" element={<Layout />} /> */}
+      {/* public routes */}
+      <Route path="login" element={<SignIn />} />
+      <Route path="register" element={<SignUp />} />
+      <Route path="linkpage" element={<LinkPage />} />
+      <Route path="unauthorized" element={<Unauthorized />} />
+
+      {/* we want to protect these routes */}
+      <Route
+        element={<RequireAuth allowedRoles={[ROLES.CUSTOMER, ROLES.ADMIN]} />}
+      >
+        <Route path="/" element={<Home />} />
+      </Route>
+
+      {/* <Route element={<RequireAuth allowedRoles={[ROLES.Editor]} />}> */}
+      {/* <Route path="editor" element={<Editor />} /> */}
+      {/* </Route> */}
+
+      <Route element={<RequireAuth allowedRoles={[ROLES.ADMIN]} />}>
+        <Route path="admin" element={<Admin />} />
+      </Route>
+
+      <Route
+        element={<RequireAuth allowedRoles={[ROLES.CUSTOMER, ROLES.ADMIN]} />}
+      >
+        <Route path="about" element={<About />} />
+      </Route>
+      {/* catch all */}
+      <Route path="*" element={<Missing />} />
+    </Routes>
   );
 }
 
