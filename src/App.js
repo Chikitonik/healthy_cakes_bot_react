@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
 import { useTelegram } from "./hooks/useTelegram";
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProductList from "./components/ProductList/ProductList";
 import Form from "./components/Form/Form";
 import SignUp from "./pages/SignUp";
@@ -17,6 +17,7 @@ import RequireAuth from "./components/Auth/RequierAuth";
 import Unauthorized from "./components/Auth/Unauthorized";
 import { ROLES } from "./data/roles";
 import { Outlet } from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   const { onToggleButton, tg } = useTelegram();
@@ -34,37 +35,42 @@ function App() {
   //   )
   // }
   return (
-    <Routes>
-      {/* <Route path="/" element={<Layout />} /> */}
-      {/* public routes */}
-      <Route path="login" element={<SignIn />} />
-      <Route path="register" element={<SignUp />} />
-      <Route path="linkpage" element={<LinkPage />} />
-      <Route path="unauthorized" element={<Unauthorized />} />
+    <>
+      {/* // <BrowserRouter> */}
+      <Navbar />
+      <Routes>
+        {/* <Route path="/" element={<Layout />} /> */}
+        {/* public routes */}
+        <Route path="login" element={<SignIn />} />
+        <Route path="register" element={<SignUp />} />
+        <Route path="linkpage" element={<LinkPage />} />
+        <Route path="unauthorized" element={<Unauthorized />} />
 
-      {/* we want to protect these routes */}
-      <Route
-        element={<RequireAuth allowedRoles={[ROLES.CUSTOMER, ROLES.ADMIN]} />}
-      >
-        <Route path="/" element={<Home />} />
-      </Route>
+        {/* we want to protect these routes */}
+        <Route
+          element={<RequireAuth allowedRoles={[ROLES.CUSTOMER, ROLES.ADMIN]} />}
+        >
+          <Route path="/" element={<Home />} />
+        </Route>
 
-      {/* <Route element={<RequireAuth allowedRoles={[ROLES.Editor]} />}> */}
-      {/* <Route path="editor" element={<Editor />} /> */}
-      {/* </Route> */}
+        {/* <Route element={<RequireAuth allowedRoles={[ROLES.Editor]} />}> */}
+        {/* <Route path="editor" element={<Editor />} /> */}
+        {/* </Route> */}
 
-      <Route element={<RequireAuth allowedRoles={[ROLES.ADMIN]} />}>
-        <Route path="admin" element={<Admin />} />
-      </Route>
+        <Route element={<RequireAuth allowedRoles={[ROLES.ADMIN]} />}>
+          <Route path="admin" element={<Admin />} />
+        </Route>
 
-      <Route
-        element={<RequireAuth allowedRoles={[ROLES.CUSTOMER, ROLES.ADMIN]} />}
-      >
-        <Route path="about" element={<About />} />
-      </Route>
-      {/* catch all */}
-      <Route path="*" element={<Missing />} />
-    </Routes>
+        <Route
+          element={<RequireAuth allowedRoles={[ROLES.CUSTOMER, ROLES.ADMIN]} />}
+        >
+          <Route path="about" element={<About />} />
+        </Route>
+        {/* catch all */}
+        <Route path="*" element={<Missing />} />
+      </Routes>
+      {/* // </BrowserRouter> */}
+    </>
   );
 }
 
