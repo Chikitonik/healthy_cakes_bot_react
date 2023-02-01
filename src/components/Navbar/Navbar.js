@@ -51,6 +51,9 @@ export default function Navbar() {
           {/* <MenuItem key="About" onClick="">
             <Typography textAlign="center">About</Typography>
           </MenuItem> */}
+          <Button color="inherit">
+            <Link to="/store">Store</Link>
+          </Button>
 
           <Button color="inherit">
             <Link to="/register">Register</Link>

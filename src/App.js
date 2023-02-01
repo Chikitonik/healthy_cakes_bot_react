@@ -10,6 +10,7 @@ import SignIn from "./pages/SignIn";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Admin from "./pages/Admin";
+import Store from "./pages/Store";
 import LinkPage from "./pages/LinkPage";
 import Missing from "./pages/LinkPage";
 import Layout from "./components/Layout/Layout";
@@ -45,7 +46,7 @@ function App() {
         <Route path="register" element={<SignUp />} />
         <Route path="linkpage" element={<LinkPage />} />
         <Route path="unauthorized" element={<Unauthorized />} />
-
+        <Route path="store" element={<Store />} />
         {/* we want to protect these routes */}
         <Route
           element={<RequireAuth allowedRoles={[ROLES.CUSTOMER, ROLES.ADMIN]} />}
