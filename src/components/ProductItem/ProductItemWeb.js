@@ -15,6 +15,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -37,13 +38,19 @@ export const ProductItemWeb = (props) => {
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card elevation="15" sx={{ maxWidth: 250, borderRadius: 3 }}>
       <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
-          </Avatar>
-        }
+        // avatar={
+        //   <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+        //     R
+        //   </Avatar>
+        // }
+        sx={{
+          height: 80,
+          // backgroundColor: "#9c27b0",
+          background: "linear-gradient(-45deg, #9c27b0 8%, #6338c0 83%)",
+          color: "#fff",
+        }}
         action={
           <IconButton aria-label="settings">
             <MoreVertIcon />
@@ -54,23 +61,63 @@ export const ProductItemWeb = (props) => {
       />
       <CardMedia
         component="img"
-        height="194"
+        height="200"
         image={product.image_source}
         alt={product.title}
+        sx={{
+          position: "absolute",
+          width: "200px",
+          ml: 9,
+          // border: "solid 1px",
+          // background: "grey",
+        }}
       />
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
-        </Typography>
+      <CardContent
+        sx={{
+          height: 200,
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          // backgroundColor: "blue",
+        }}
+      >
+        <CardContent>
+          <Typography
+            variant="h5"
+            sx={{
+              position: "absolute",
+              color: "#fff",
+              backgroundColor: "#c66900",
+              ml: -3,
+              mt: -3,
+              padding: "0 10px 0 10px",
+              borderRadius: 1,
+              fontWeight: "bold",
+            }}
+          >
+            $ {product.price}
+          </Typography>
+        </CardContent>
+        <CardContent>
+          <Typography
+            sx={{
+              position: "absolute",
+              color: "#fff",
+              backgroundColor: "#ff9800",
+              ml: -2,
+              mt: -3,
+              padding: "0 10px 0 10px",
+              borderRadius: 1,
+              fontWeight: "bold",
+            }}
+          >
+            NEW
+          </Typography>
+        </CardContent>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
         </IconButton>
         <CardActions>
           <Button size="small" variant="contained">
