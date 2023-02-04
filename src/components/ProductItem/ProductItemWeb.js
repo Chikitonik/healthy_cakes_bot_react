@@ -39,6 +39,20 @@ export const ProductItemWeb = (props) => {
 
   return (
     <Card elevation="15" sx={{ maxWidth: 250, borderRadius: 3 }}>
+      <CardMedia
+        component="img"
+        height="200"
+        image={product.image_source}
+        alt={product.title}
+        sx={{
+          position: "absolute",
+          width: "200px",
+          ml: 3,
+          mt: -2,
+          border: "solid 1px",
+          // background: "grey",
+        }}
+      />
       <CardHeader
         // avatar={
         //   <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -48,6 +62,7 @@ export const ProductItemWeb = (props) => {
         sx={{
           height: 80,
           // backgroundColor: "#9c27b0",
+          mt: 20,
           background: "linear-gradient(-45deg, #9c27b0 8%, #6338c0 83%)",
           color: "#fff",
         }}
@@ -59,19 +74,7 @@ export const ProductItemWeb = (props) => {
         title={product.title}
         // subheader="September 14, 2016"
       />
-      <CardMedia
-        component="img"
-        height="200"
-        image={product.image_source}
-        alt={product.title}
-        sx={{
-          position: "absolute",
-          width: "200px",
-          ml: 9,
-          // border: "solid 1px",
-          // background: "grey",
-        }}
-      />
+
       <CardContent
         sx={{
           height: 200,
