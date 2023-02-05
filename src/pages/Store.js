@@ -9,7 +9,9 @@ export const Store = () => {
   {
     if (SQLtableData) {
       return (
-        <Container>
+        <Container
+          sx={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}
+        >
           {SQLtableData.map((item) => (
             <ProductItemWeb
               product={item}
