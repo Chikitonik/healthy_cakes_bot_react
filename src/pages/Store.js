@@ -1,5 +1,6 @@
 import useFetchSQLtableData from "../hooks/useFetchSQLtableData";
 import { ProductItemWeb } from "../components/ProductItem/ProductItemWeb";
+import Container from "@mui/material/Container";
 
 export const Store = () => {
   const SQLtable = "cakes";
@@ -8,7 +9,7 @@ export const Store = () => {
   {
     if (SQLtableData) {
       return (
-        <div>
+        <Container>
           {SQLtableData.map((item) => (
             <ProductItemWeb
               product={item}
@@ -17,7 +18,7 @@ export const Store = () => {
               //   className={"item"}
             />
           ))}
-        </div>
+        </Container>
       );
     } else {
       return <div>{errMsg}</div>;

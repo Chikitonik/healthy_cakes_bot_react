@@ -16,6 +16,9 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
+import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -38,7 +41,7 @@ export const ProductItemWeb = (props) => {
   };
 
   return (
-    <Card elevation="15" sx={{ maxWidth: 250, borderRadius: 3 }}>
+    <Card elevation="15" sx={{ maxWidth: 250, borderRadius: 3, m: 2, mt: 13 }}>
       <CardMedia
         component="img"
         height="200"
@@ -48,36 +51,14 @@ export const ProductItemWeb = (props) => {
           position: "absolute",
           width: "200px",
           ml: 3,
-          mt: -2,
-          border: "solid 1px",
+          mt: -10,
+          // border: "solid 1px",
           // background: "grey",
         }}
       />
-      <CardHeader
-        // avatar={
-        //   <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-        //     R
-        //   </Avatar>
-        // }
-        sx={{
-          height: 80,
-          // backgroundColor: "#9c27b0",
-          mt: 20,
-          background: "linear-gradient(-45deg, #9c27b0 8%, #6338c0 83%)",
-          color: "#fff",
-        }}
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title={product.title}
-        // subheader="September 14, 2016"
-      />
-
       <CardContent
         sx={{
-          height: 200,
+          // height: 200,
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
@@ -90,9 +71,9 @@ export const ProductItemWeb = (props) => {
             sx={{
               position: "absolute",
               color: "#fff",
-              backgroundColor: "#c66900",
+              backgroundColor: "#00BCA7",
               ml: -3,
-              mt: -3,
+              mt: 6,
               padding: "0 10px 0 10px",
               borderRadius: 1,
               fontWeight: "bold",
@@ -106,9 +87,9 @@ export const ProductItemWeb = (props) => {
             sx={{
               position: "absolute",
               color: "#fff",
-              backgroundColor: "#ff9800",
+              backgroundColor: "#00B57F",
               ml: -2,
-              mt: -3,
+              mt: -12,
               padding: "0 10px 0 10px",
               borderRadius: 1,
               fontWeight: "bold",
@@ -116,16 +97,47 @@ export const ProductItemWeb = (props) => {
           >
             NEW
           </Typography>
+          <Typography
+            sx={{
+              position: "absolute",
+              color: "#fff",
+              backgroundColor: "#72C879",
+              ml: -2,
+              mt: -8,
+              padding: "0 10px 0 10px",
+              borderRadius: 1,
+              fontWeight: "bold",
+            }}
+          >
+            -10%
+          </Typography>
         </CardContent>
       </CardContent>
+      <CardHeader
+        sx={{
+          // height: 80,
+          // backgroundColor: "#9c27b0",
+          mt: 5,
+          // background: "linear-gradient(-45deg, #9c27b0 8%, #6338c0 83%)",
+          // color: "#fff",
+        }}
+        action={
+          <IconButton aria-label="settings">
+            <MoreVertIcon />
+          </IconButton>
+        }
+        title={product.title}
+        // subheader="September 14, 2016"
+      />
+
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
         <CardActions>
-          <Button size="small" variant="contained">
-            add to cart
-          </Button>
+          <AddCircleOutlineOutlinedIcon color="success" />
+          <ShoppingCartOutlinedIcon />
+          <RemoveCircleOutlineOutlinedIcon color="disabled" />
         </CardActions>
         <ExpandMore
           expand={expanded}

@@ -69,10 +69,20 @@ export const ModalSelectedRow = ({ props }) => {
   };
 
   const updateValue = (e) => {
+    const updatedSelectedRow = {};
+    Object.entries(selectedRow).forEach(([key, value]) => {
+      if (typeof value === "string") {
+        updatedSelectedRow[key] = value.replaceAll("/", "%2F");
+      } else {
+        updatedSelectedRow[key] = value;
+      }
+    });
+
     setSelectedRow({
-      ...selectedRow,
+      ...updatedSelectedRow,
       [e.target.id]: e.target.value.replaceAll("/", "%2F"),
     });
+    // console.log("selectedRow :>> ", selectedRow);
   };
 
   const handleClosePopover = () => {
@@ -110,18 +120,20 @@ export const ModalSelectedRow = ({ props }) => {
         </Button>
       </Box>
       <List>
-        {Object.entries(selectedRow).map((value, index) => (
-          <TextField
-            key={value[0]}
-            id={value[0]}
-            defaultValue={value[1]}
-            label={value[0]}
-            fullWidth
-            sx={{ m: 1 }}
-            disabled={value[0] === "id"}
-            onChange={(e) => updateValue(e)}
-          />
-        ))}
+        {Object.entries(selectedRow).map(([key, value]) => {
+          return (
+            <TextField
+              key={key}
+              id={key}
+              defaultValue={value}
+              label={key}
+              fullWidth
+              sx={{ m: 1 }}
+              disabled={key === "id"}
+              onChange={(e) => updateValue(e)}
+            />
+          );
+        })}
       </List>
       <Button
         variant="contained"
