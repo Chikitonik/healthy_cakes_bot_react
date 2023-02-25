@@ -15,6 +15,7 @@ export const Store = () => {
           {SQLtableData.map((item) => (
             <ProductItemWeb
               product={item}
+              key={item.id}
               //   onAdd={onAdd}
               //   onShowDescription={onShowDescription}
               //   className={"item"}

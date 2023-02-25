@@ -116,9 +116,10 @@ export default function SignIn() {
       const role = response?.data[0].result[0].role;
       if (response?.data[0].result[0].username === user) {
         setAuth({ user, role });
-        localStorage.setItem("user", user);
-        localStorage.setItem("isLoggedIn", true);
-        localStorage.setItem("role", role);
+        localStorage.setItem(
+          "CakeStore",
+          JSON.stringify({ user: user, isLoggedIn: true, role: role })
+        );
         setUser("");
         setPwd("");
         setSuccess(true);

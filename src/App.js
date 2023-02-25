@@ -13,6 +13,7 @@ import Admin from "./pages/Admin";
 import Store from "./pages/Store";
 import LinkPage from "./pages/LinkPage";
 import Missing from "./pages/LinkPage";
+import Cart from "./pages/Cart";
 import Layout from "./components/Layout/Layout";
 import RequireAuth from "./components/Auth/RequierAuth";
 import Unauthorized from "./components/Auth/Unauthorized";
@@ -47,6 +48,7 @@ function App() {
         <Route path="linkpage" element={<LinkPage />} />
         <Route path="unauthorized" element={<Unauthorized />} />
         <Route path="store" element={<Store />} />
+        <Route path="cart" element={<Cart />} />
         {/* we want to protect these routes */}
         <Route
           element={<RequireAuth allowedRoles={[ROLES.CUSTOMER, ROLES.ADMIN]} />}

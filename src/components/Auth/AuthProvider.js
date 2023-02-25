@@ -5,9 +5,9 @@ const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
   let authLocalStorage = {};
   try {
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-    const user = localStorage.getItem("user");
-    const role = +localStorage.getItem("role");
+    const { isLoggedIn, user, role } = JSON.parse(
+      localStorage.getItem("CakeStore")
+    );
     authLocalStorage = { user: isLoggedIn ? user : "", role: role };
   } catch (err) {
     authLocalStorage = {};

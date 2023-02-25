@@ -79,7 +79,7 @@ const Admin = () => {
         <Tab label="cakes" {...a11yProps(2)} />
         <Tab label="ingredients" {...a11yProps(3)} />
         <Tab label="cake_ingredients" {...a11yProps(4)} />
-        <Tab label="Item Six" {...a11yProps(5)} />
+        <Tab label="carts" {...a11yProps(5)} />
         <Tab label="Item Seven" {...a11yProps(6)} />
       </Tabs>
       <TabPanel
