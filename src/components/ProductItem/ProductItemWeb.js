@@ -22,6 +22,9 @@ import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOut
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import urls from "../../data/urls";
+import { Context } from "../Provider/Provider";
+import { useState, useContext, useEffect } from "react";
+import Badge from "@mui/material/Badge";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -38,12 +41,26 @@ export const ProductItemWeb = (props) => {
   const { product } = props;
   const { auth } = useAuth();
 
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
+  const { SQLtableDataCartRows, cartRowsCount, setCartRowsCount } =
+    useContext(Context);
+
+  const inCartCount = SQLtableDataCartRows?.filter(
+    (value) => value.cake_id === product.id
+  ).length;
+  const [inCartCountState, setInCartCountState] = useState(inCartCount || 0);
+
+  useEffect(() => {
+    if (inCartCount != undefined || inCartCount != 0) {
+      // console.log("inCartCount :>> ", inCartCount);
+      setInCartCountState(inCartCount);
+    }
+  }, [inCartCount]);
   const handleAddToCart = async () => {
     const priceWithDiscount =
       Math.floor(product.price * (100 - product.discount)) / 100;
@@ -65,6 +82,9 @@ export const ProductItemWeb = (props) => {
         setErrMsg("No Server Response");
       }
     }
+
+    setCartRowsCount(parseInt(cartRowsCount) + 1);
+    setInCartCountState(inCartCountState + 1);
   };
 
   const handleRemoveFromCart = async () => {
@@ -78,6 +98,9 @@ export const ProductItemWeb = (props) => {
           headers: { "Content-Type": "application/json" },
         }
       );
+      setCartRowsCount(parseInt(cartRowsCount) - 1);
+      setInCartCountState(inCartCountState - 1);
+
       // fetchSQLtableData();
       // handleCloseModalNewRow();
     } catch (err) {
@@ -89,7 +112,6 @@ export const ProductItemWeb = (props) => {
       }
     }
   };
-
   return (
     <Card
       key={product.id}
@@ -204,12 +226,21 @@ export const ProductItemWeb = (props) => {
           <IconButton aria-label="add to cart" onClick={handleAddToCart}>
             <AddCircleOutlineOutlinedIcon color="success" />
           </IconButton>
-          <ShoppingCartOutlinedIcon />
+
+          <IconButton size="large" color="inherit">
+            <Badge badgeContent={inCartCountState} color="success">
+              <ShoppingCartOutlinedIcon />
+            </Badge>
+          </IconButton>
+
           <IconButton
             aria-label="remove from cart"
             onClick={handleRemoveFromCart}
+            disabled={true && !inCartCountState > 0}
           >
-            <RemoveCircleOutlineOutlinedIcon color="disabled" />
+            <RemoveCircleOutlineOutlinedIcon
+            // color="disabled"
+            />
           </IconButton>
         </CardActions>
         <IconButton aria-label="settings">

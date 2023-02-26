@@ -80,7 +80,9 @@ const Admin = () => {
         <Tab label="ingredients" {...a11yProps(3)} />
         <Tab label="cake_ingredients" {...a11yProps(4)} />
         <Tab label="carts" {...a11yProps(5)} />
-        <Tab label="Item Seven" {...a11yProps(6)} />
+        <Tab label="customer_address" {...a11yProps(6)} />
+        <Tab label="order_header" {...a11yProps(7)} />
+        <Tab label="orders_position" {...a11yProps(8)} />
       </Tabs>
       <TabPanel
         value={tabNum}
@@ -145,6 +147,22 @@ const Admin = () => {
       >
         <FetchedTable SQLtable={SQLtable} />
       </TabPanel>
+      <TabPanel
+        value={tabNum}
+        index={7}
+        sx={{
+          width: 1200,
+        }}
+      >
+        <FetchedTable SQLtable={SQLtable} />
+      </TabPanel>
+      <TabPanel
+        value={tabNum}
+        index={8}
+        sx={{
+          width: 1200,
+        }}
+      ></TabPanel>
     </Box>
   );
 };

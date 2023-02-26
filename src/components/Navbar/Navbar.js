@@ -15,36 +15,15 @@ import "./navbar.css";
 import useAuth from "../../hooks/useAuth";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import urls from "../../data/urls";
+import { useState, useEffect, useContext } from "react";
+import { Context } from "../Provider/Provider";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 export default function Navbar() {
   const { auth } = useAuth();
-  const [cartRowsCount, setCartRowsCount] = useState();
-  const [errMsg, setErrMsg] = useState("No data");
 
-  const fetchCartRowsCount = async () => {
-    try {
-      const response = await axios.get(urls.USER_CART_COUNT_URL + auth.user, {
-        headers: { "Content-Type": "application/json" },
-        // withCredentials: true,
-      });
-      console.log(
-        "fetchCartRowsCount response?.data[0].countRows[0].count >>",
-        JSON.stringify(response?.data[0].countRows[0].count)
-      );
-      setCartRowsCount(response?.data[0].countRows[0].count);
-    } catch (err) {
-      console.log("err :>> ", err);
-      if (!err?.response) {
-        setErrMsg("No Server Response");
-      }
-    }
-  };
-  useEffect(() => {
-    fetchCartRowsCount();
-  }, []);
+  const { cartRowsCount, setCartRowsCount } = useContext(Context);
+  // console.log("cartRowsCount :>> ", cartRowsCount);
 
   const theme = createTheme({
     palette: {
@@ -136,6 +115,11 @@ export default function Navbar() {
               <Badge badgeContent={17} color="error">
                 <NotificationsIcon />
               </Badge>
+            </IconButton>
+            <IconButton size="large" color="inherit">
+              <Link to="/settings">
+                <SettingsIcon />
+              </Link>
             </IconButton>
           </Toolbar>
         </AppBar>
