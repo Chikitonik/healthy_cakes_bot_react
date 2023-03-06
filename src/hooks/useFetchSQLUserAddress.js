@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import urls from "../data/urls";
 
-const useFetchSQLUserAddress = (SQLtable) => {
+const useFetchSQLUserAddress = () => {
   const [SQLtableAddress, setSQLtableAddress] = useState();
   const [errMsg, setErrMsg] = useState("No data");
   const username = JSON.parse(localStorage.getItem("CakeStore")).user;

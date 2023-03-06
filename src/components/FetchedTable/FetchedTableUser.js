@@ -69,7 +69,7 @@ const FetchedTable = (props) => {
         <Paper
           elevation={3}
           sx={{
-            height: 800,
+            // height: 400,
             width: "80vw",
           }}
         >
