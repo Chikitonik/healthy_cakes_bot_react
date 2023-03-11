@@ -9,6 +9,7 @@ import CakeIcon from "@mui/icons-material/Cake";
 import Badge from "@mui/material/Badge";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MailIcon from "@mui/icons-material/Mail";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import "./navbar.css";
@@ -23,6 +24,7 @@ export default function Navbar() {
   const { auth } = useAuth();
 
   const { cartRowsCount, setCartRowsCount } = useContext(Context);
+  const { ordersRowsCount, setOrdersRowsCount } = useContext(Context);
   // console.log("cartRowsCount :>> ", cartRowsCount);
 
   const theme = createTheme({
@@ -112,8 +114,10 @@ export default function Navbar() {
               aria-label="show 17 new notifications"
               color="inherit"
             >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
+              <Badge badgeContent={ordersRowsCount} color="error">
+                <Link to="/orders">
+                  <LocalShippingIcon />
+                </Link>
               </Badge>
             </IconButton>
             <IconButton size="large" color="inherit">

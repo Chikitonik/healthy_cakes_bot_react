@@ -81,7 +81,7 @@ const Admin = () => {
         <Tab label="cake_ingredients" {...a11yProps(4)} />
         <Tab label="carts" {...a11yProps(5)} />
         <Tab label="customer_address" {...a11yProps(6)} />
-        <Tab label="order_header" {...a11yProps(7)} />
+        <Tab label="orders_header" {...a11yProps(7)} />
         <Tab label="orders_position" {...a11yProps(8)} />
       </Tabs>
       <TabPanel
@@ -162,7 +162,9 @@ const Admin = () => {
         sx={{
           width: 1200,
         }}
-      ></TabPanel>
+      >
+        <FetchedTable SQLtable={SQLtable} />
+      </TabPanel>
     </Box>
   );
 };

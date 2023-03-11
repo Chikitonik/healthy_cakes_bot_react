@@ -21,6 +21,7 @@ import { ROLES } from "./data/roles";
 import { Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Settings from "./pages/Settings";
+import Orders from "./pages/Orders";
 
 function App() {
   const { onToggleButton, tg } = useTelegram();
@@ -51,6 +52,7 @@ function App() {
         <Route path="store" element={<Store />} />
         <Route path="cart" element={<Cart />} />
         <Route path="settings" element={<Settings />} />
+        <Route path="orders" element={<Orders />} />
         {/* we want to protect these routes */}
         <Route
           element={<RequireAuth allowedRoles={[ROLES.CUSTOMER, ROLES.ADMIN]} />}

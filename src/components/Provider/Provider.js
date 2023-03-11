@@ -1,9 +1,11 @@
 import { createContext, useState, useEffect } from "react";
 import useFetchCartRows from "../../hooks/useFetchCartRows";
+import useFetchOrdersRows from "../../hooks/useFetchOrdersRows";
 
 export const Context = createContext({});
 
 const Provider = (props) => {
+  // cart
   const [fetchedCartRowsCount, fetchedSQLtableData, errMsg] =
     useFetchCartRows();
   const [SQLtableDataCartRows, setSQLtableDataCartRows] =
@@ -16,6 +18,22 @@ const Provider = (props) => {
       setSQLtableDataCartRows(fetchedSQLtableData);
     }
   }, [fetchedCartRowsCount]);
+  // orders
+  const [fetchedOrdersRowsCount, fetchedSQLtableOrdersData, errOrdersMsg] =
+    useFetchOrdersRows();
+  const [SQLtableDataOrdersRows, setSQLtableDataOrdersRows] = useState(
+    fetchedSQLtableOrdersData
+  );
+  const [ordersRowsCount, setOrdersRowsCount] = useState(
+    fetchedOrdersRowsCount
+  );
+
+  useEffect(() => {
+    if (fetchedOrdersRowsCount !== undefined) {
+      setOrdersRowsCount(fetchedOrdersRowsCount);
+      setSQLtableDataOrdersRows(fetchedSQLtableOrdersData);
+    }
+  }, [fetchedOrdersRowsCount]);
 
   return (
     <Context.Provider
@@ -25,6 +43,11 @@ const Provider = (props) => {
         errMsg,
         setCartRowsCount,
         setSQLtableDataCartRows,
+        ordersRowsCount,
+        SQLtableDataOrdersRows,
+        errOrdersMsg,
+        setOrdersRowsCount,
+        setSQLtableDataOrdersRows,
       }}
     >
       {props.children}
