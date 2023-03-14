@@ -1,8 +1,7 @@
 import useFetchSQLtableData from "../hooks/useFetchSQLtableData";
 import { ProductItemWeb } from "../components/ProductItem/ProductItemWeb";
 import Container from "@mui/material/Container";
-import { Context } from "../components/Provider/Provider";
-import { useState, useContext, useEffect } from "react";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 export const Store = () => {
   const SQLtable = "cakes";
@@ -11,7 +10,11 @@ export const Store = () => {
   if (SQLtableData) {
     return (
       <Container
-        sx={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+        }}
       >
         {SQLtableData.map((item) => (
           <ProductItemWeb
@@ -25,7 +28,17 @@ export const Store = () => {
       </Container>
     );
   } else {
-    return <div>{errMsg}</div>;
+    // return <div>{errMsg}</div>;
+    return (
+      <LoadingButton
+        loading
+        size="large"
+        loadingPosition="start"
+        sx={{ p: 5, ml: 5 }}
+      >
+        loading...
+      </LoadingButton>
+    );
   }
 };
 

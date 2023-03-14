@@ -7,8 +7,6 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import CakeIcon from "@mui/icons-material/Cake";
 import Badge from "@mui/material/Badge";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import MailIcon from "@mui/icons-material/Mail";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
@@ -22,7 +20,6 @@ import SettingsIcon from "@mui/icons-material/Settings";
 
 export default function Navbar() {
   const { auth } = useAuth();
-
   const { cartRowsCount, setCartRowsCount } = useContext(Context);
   const { ordersRowsCount, setOrdersRowsCount } = useContext(Context);
   // console.log("cartRowsCount :>> ", cartRowsCount);
@@ -37,7 +34,12 @@ export default function Navbar() {
   });
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ flexGrow: 1, mb: 10 }}>
+      <Box
+        sx={{
+          flexGrow: 1,
+          mb: 8,
+        }}
+      >
         <AppBar position="fixed" color="neutral">
           <Toolbar>
             <CakeIcon sx={{ mr: 1 }} />
@@ -65,7 +67,7 @@ export default function Navbar() {
               component="div"
               sx={{ flexGrow: 1 }}
             >
-              {useLocation().pathname.substring(1)}
+              {/* {useLocation().pathname.substring(1)} */}
             </Typography>
             {/* <MenuItem key="About" onClick="">
             <Typography textAlign="center">About</Typography>
@@ -82,45 +84,43 @@ export default function Navbar() {
               <Link to="/login">Login</Link>
             </Button>
 
-            <Button color="inherit">
+            {/* <Button color="inherit">
               <Link to="/home">Home</Link>
             </Button>
 
             <Button color="inherit">
               <Link to="/about">About</Link>
-            </Button>
+            </Button> */}
+            {auth.role === 1 && (
+              <Button color="inherit">
+                <Link to="/admin">Admin</Link>
+              </Button>
+            )}
 
-            <Button color="inherit">
-              <Link to="/admin">Admin</Link>
-            </Button>
-
-            <Typography variant="h6" color="inherit" component="div">
+            <Typography
+              variant="h6"
+              color="inherit"
+              component="div"
+              sx={{ ml: 2 }}
+            >
               {auth.user}
             </Typography>
 
-            <IconButton
-              size="large"
-              // aria-label="show cart items"
-              color="inherit"
-            >
+            <IconButton color="inherit">
               <Badge badgeContent={cartRowsCount} color="error">
                 <Link to="/cart">
                   <ShoppingCartIcon />
                 </Link>
               </Badge>
             </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
+            <IconButton color="inherit">
               <Badge badgeContent={ordersRowsCount} color="error">
                 <Link to="/orders">
                   <LocalShippingIcon />
                 </Link>
               </Badge>
             </IconButton>
-            <IconButton size="large" color="inherit">
+            <IconButton color="inherit">
               <Link to="/settings">
                 <SettingsIcon />
               </Link>

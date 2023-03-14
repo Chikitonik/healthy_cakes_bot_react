@@ -14,6 +14,7 @@ import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
 export const Settings = () => {
   const EMAIL_REGEX =
@@ -158,198 +159,198 @@ export const Settings = () => {
   };
   // #endregion modal
   return (
-    <Paper
-      elevation={3}
+    <Box
       sx={{
-        height: "85vh",
-        width: "95vw",
-        ml: 2,
-        p: 2,
+        p: 3,
+        background: "#eeeeee",
+        height: "90vh",
       }}
     >
-      {/* <FetchedTableUser SQLtable="customer_address" /> */}
-      {/* <FetchedTableUser SQLtable="users" /> */}
-      {/* {JSON.stringify(SQLtableData)} */}
-      {/* <br /> */}
-      {/* {JSON.stringify(SQLtableAddress)} */}
-      {/* <br /> */}
-      <Typography variant="h6" gutterBottom>
-        Email
-      </Typography>
-      <Tooltip
-        disableHoverListener
-        title={!validEmail && "Invalid email address."}
-        placement="bottom-start"
-      >
-        <TextField
-          variant="standard"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          disabled={true && !isEditing}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                {!isEditing ? (
-                  <IconButton
-                    onClick={handleEditClick}
-                    sx={{
-                      color: "lightgreen",
-                      "&:hover": {
-                        color: "green",
-                      },
-                    }}
-                  >
-                    <Edit />
-                  </IconButton>
-                ) : (
-                  <>
+      <Paper elevation={3} sx={{ p: 2 }}>
+        {/* <FetchedTableUser SQLtable="customer_address" /> */}
+        {/* <FetchedTableUser SQLtable="users" /> */}
+        {/* {JSON.stringify(SQLtableData)} */}
+        {/* <br /> */}
+        {/* {JSON.stringify(SQLtableAddress)} */}
+        {/* <br /> */}
+        <Typography variant="h6" gutterBottom>
+          Email
+        </Typography>
+        <Tooltip
+          disableHoverListener
+          title={!validEmail && "Invalid email address."}
+          placement="bottom-start"
+        >
+          <TextField
+            variant="standard"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            disabled={true && !isEditing}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  {!isEditing ? (
                     <IconButton
-                      disabled={!validEmail}
-                      onClick={handleSaveClick}
+                      onClick={handleEditClick}
                       sx={{
-                        color: "lightblue",
+                        color: "lightgreen",
                         "&:hover": {
-                          color: "blue",
+                          color: "green",
                         },
                       }}
                     >
-                      <Save />
+                      <Edit />
                     </IconButton>
-                    <IconButton
-                      onClick={handleCancelClick}
-                      sx={{
-                        color: "pink",
-                        "&:hover": {
-                          color: "red",
-                        },
-                      }}
-                    >
-                      <Cancel />
-                    </IconButton>
-                  </>
-                )}
-              </InputAdornment>
-            ),
-          }}
-        />
-      </Tooltip>
-      <Typography variant="h6" gutterBottom sx={{ mt: 3 }}>
-        Addresses
-      </Typography>
-      {SQLtableAddress &&
-        SQLtableAddress.map((row, index) => (
-          <>
-            <br />
-            <TextField
-              variant="standard"
-              key={index}
-              value={row.address}
-              onChange={(e) => {
-                const updatedAddress = e.target.value;
-                const updatedRows = [...SQLtableAddress];
-                updatedRows[index].address = updatedAddress;
-                setAddress(updatedRows);
-              }}
-              // disabled={!isEditingAddress}
-              disabled={editRowIndex !== index}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    {!isEditingAddress || editRowIndex !== index ? (
+                  ) : (
+                    <>
                       <IconButton
-                        onClick={() => handleEditClickAddress(index)}
+                        disabled={!validEmail}
+                        onClick={handleSaveClick}
                         sx={{
-                          color: "lightgreen",
+                          color: "lightblue",
                           "&:hover": {
-                            color: "green",
+                            color: "blue",
                           },
                         }}
                       >
-                        <Edit />
+                        <Save />
                       </IconButton>
-                    ) : (
-                      <>
-                        <IconButton
-                          onClick={() => {
-                            handleSaveClickAddress(index);
-                            setIsEditingAddress(false);
-                            setEditRowIndex(-1);
-                          }}
-                          sx={{
-                            color: "lightblue",
-                            "&:hover": {
-                              color: "blue",
-                            },
-                          }}
-                        >
-                          <Save />
-                        </IconButton>
-                        <IconButton
-                          onClick={() => {
-                            // setAddress(SQLtableAddress);
-                            setIsEditingAddress(false);
-                            setEditRowIndex(-1); //
-                          }}
-                          sx={{
-                            color: "pink",
-                            "&:hover": {
-                              color: "red",
-                            },
-                          }}
-                        >
-                          <Cancel />
-                        </IconButton>
-                        <IconButton
-                          onClick={() => {
-                            handleDeleteClickAddress(index);
-                            setIsEditingAddress(false);
-                            setEditRowIndex(-1); //
-                          }}
-                          sx={{
-                            color: "pink",
-                            "&:hover": {
-                              color: "red",
-                            },
-                          }}
-                        >
-                          <DeleteForeverIcon />
-                        </IconButton>
-                      </>
-                    )}
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </>
-        ))}
-      <br />
-      <Button
-        variant="contained"
-        // color="error"
-        // value={selectedRow.id}
-        onClick={handleNewAddress}
-        sx={{ mt: 3 }}
-      >
-        Add new address
-      </Button>
-      {openModalNewRow && (
-        <Modal
-          open={openModalNewRow}
-          onClose={handleCloseModalNewAddress}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <ModalNewAddress
-            props={{
-              // columns: ["address"],
-              // SQLtable: "customer_address",
-              fetchSQLtableData: fetchSQLtableData,
-              handleCloseModalNewAddress: handleCloseModalNewAddress,
+                      <IconButton
+                        onClick={handleCancelClick}
+                        sx={{
+                          color: "pink",
+                          "&:hover": {
+                            color: "red",
+                          },
+                        }}
+                      >
+                        <Cancel />
+                      </IconButton>
+                    </>
+                  )}
+                </InputAdornment>
+              ),
             }}
           />
-        </Modal>
-      )}
-    </Paper>
+        </Tooltip>
+        <Typography variant="h6" gutterBottom sx={{ mt: 3 }}>
+          Addresses
+        </Typography>
+        {SQLtableAddress &&
+          SQLtableAddress.map((row, index) => (
+            <>
+              <br />
+              <TextField
+                variant="standard"
+                key={index}
+                value={row.address}
+                onChange={(e) => {
+                  const updatedAddress = e.target.value;
+                  const updatedRows = [...SQLtableAddress];
+                  updatedRows[index].address = updatedAddress;
+                  setAddress(updatedRows);
+                }}
+                // disabled={!isEditingAddress}
+                disabled={editRowIndex !== index}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      {!isEditingAddress || editRowIndex !== index ? (
+                        <IconButton
+                          onClick={() => handleEditClickAddress(index)}
+                          sx={{
+                            color: "lightgreen",
+                            "&:hover": {
+                              color: "green",
+                            },
+                          }}
+                        >
+                          <Edit />
+                        </IconButton>
+                      ) : (
+                        <>
+                          <IconButton
+                            onClick={() => {
+                              handleSaveClickAddress(index);
+                              setIsEditingAddress(false);
+                              setEditRowIndex(-1);
+                            }}
+                            sx={{
+                              color: "lightblue",
+                              "&:hover": {
+                                color: "blue",
+                              },
+                            }}
+                          >
+                            <Save />
+                          </IconButton>
+                          <IconButton
+                            onClick={() => {
+                              // setAddress(SQLtableAddress);
+                              setIsEditingAddress(false);
+                              setEditRowIndex(-1); //
+                            }}
+                            sx={{
+                              color: "pink",
+                              "&:hover": {
+                                color: "red",
+                              },
+                            }}
+                          >
+                            <Cancel />
+                          </IconButton>
+                          <IconButton
+                            onClick={() => {
+                              handleDeleteClickAddress(index);
+                              setIsEditingAddress(false);
+                              setEditRowIndex(-1); //
+                            }}
+                            sx={{
+                              color: "pink",
+                              "&:hover": {
+                                color: "red",
+                              },
+                            }}
+                          >
+                            <DeleteForeverIcon />
+                          </IconButton>
+                        </>
+                      )}
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </>
+          ))}
+        <br />
+        <Button
+          variant="contained"
+          // color="error"
+          // value={selectedRow.id}
+          onClick={handleNewAddress}
+          sx={{ mt: 3 }}
+        >
+          Add new address
+        </Button>
+        {openModalNewRow && (
+          <Modal
+            open={openModalNewRow}
+            onClose={handleCloseModalNewAddress}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <ModalNewAddress
+              props={{
+                // columns: ["address"],
+                // SQLtable: "customer_address",
+                fetchSQLtableData: fetchSQLtableData,
+                handleCloseModalNewAddress: handleCloseModalNewAddress,
+              }}
+            />
+          </Modal>
+        )}
+      </Paper>
+    </Box>
   );
 };
 

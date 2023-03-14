@@ -102,7 +102,9 @@ const Orders = () => {
           <TableCell>{row.id}</TableCell>
           <TableCell>{row.address}</TableCell>
           <TableCell>{row.sum}</TableCell>
-          <TableCell>{row.is_delivered}</TableCell>
+          <TableCell>
+            {row.is_delivered ? "delivered" : "not delivered yet"}
+          </TableCell>
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -149,7 +151,11 @@ const Orders = () => {
         height: "90vh",
       }}
     >
-      <Paper elevation={3}>
+      <Paper elevation={3} sx={{ p: 2 }}>
+        <Typography variant="h6" sx={{ p: 1 }}>
+          Orders
+        </Typography>
+
         {SQLtableDataOrdersRows ? (
           <TableContainer component={Paper}>
             <Table aria-label="collapsible table">
@@ -158,9 +164,9 @@ const Orders = () => {
                   <TableCell />
                   {/* <TableCell>Dessert (100g serving)</TableCell> */}
                   <TableCell>Order number</TableCell>
-                  <TableCell>address_id</TableCell>
-                  <TableCell>sum</TableCell>
-                  <TableCell>is_delivered</TableCell>
+                  <TableCell>Address</TableCell>
+                  <TableCell>Sum</TableCell>
+                  <TableCell>Order status</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
