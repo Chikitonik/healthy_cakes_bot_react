@@ -91,6 +91,12 @@ export default function Navbar() {
             <Button color="inherit">
               <Link to="/about">About</Link>
             </Button> */}
+            {(auth.role === 1 || auth.role === 4) && (
+              <Button color="inherit">
+                <Link to="/baker">baker</Link>
+              </Button>
+            )}
+
             {auth.role === 1 && (
               <Button color="inherit">
                 <Link to="/admin">Admin</Link>
