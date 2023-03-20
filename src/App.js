@@ -23,6 +23,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Settings from "./pages/Settings";
 import Orders from "./pages/Orders";
 import Baker from "./pages/Baker";
+import Courier from "./pages/Courier";
 
 function App() {
   const { onToggleButton, tg } = useTelegram();
@@ -54,7 +55,8 @@ function App() {
         <Route path="cart" element={<Cart />} />
         <Route path="settings" element={<Settings />} />
         <Route path="orders" element={<Orders />} />
-        <Route path="baker" element={<Baker />} />
+        {/* <Route path="baker" element={<Baker />} /> */}
+        {/* <Route path="courier" element={<Courier />} /> */}
         {/* we want to protect these routes */}
         <Route
           element={<RequireAuth allowedRoles={[ROLES.CUSTOMER, ROLES.ADMIN]} />}
@@ -75,6 +77,19 @@ function App() {
         >
           <Route path="about" element={<About />} />
         </Route>
+
+        <Route
+          element={<RequireAuth allowedRoles={[ROLES.BAKER, ROLES.ADMIN]} />}
+        >
+          <Route path="baker" element={<Baker />} />
+        </Route>
+
+        <Route
+          element={<RequireAuth allowedRoles={[ROLES.COURIER, ROLES.ADMIN]} />}
+        >
+          <Route path="courier" element={<Courier />} />
+        </Route>
+
         {/* catch all */}
         <Route path="*" element={<Missing />} />
       </Routes>

@@ -19,7 +19,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import FetchedTable from "../components/FetchedTable/FetchedTable";
 import Button from "@mui/material/Button";
 
-const Orders = () => {
+const Courier = () => {
   // const {
   //   SQLtableDataOrdersRows,
   //   setSQLtableDataOrdersRows,
@@ -35,7 +35,7 @@ const Orders = () => {
   const fetchSQLtableData = async () => {
     try {
       const response = await axios.get(
-        urls.ORDERS_ALL_URL + "false/false/false",
+        urls.ORDERS_ALL_URL + "true/true,false/false",
         {
           headers: { "Content-Type": "application/json" },
           // withCredentials: true,
@@ -118,14 +118,34 @@ const Orders = () => {
     const { row } = props;
     const [open, setOpen] = React.useState(false);
 
-    const handleSetReady = async () => {
+    const handleSetDelivering = async () => {
       const id = props.row.id;
       const sum = props.row.sum;
       const address = props.row.address;
       // console.log("props.row :>> ", props.row);
       try {
         const response = await axios.put(
-          `${urls.USER_ORDERS_URL}set_status/${id}/is_ready/${sum}/${address}`,
+          `${urls.USER_ORDERS_URL}set_status/${id}/is_delivering/${sum}/${address}`,
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+      } catch (err) {
+        console.log("err :>> ", err);
+        if (!err?.response) {
+          console.log("No Server Response");
+        }
+      }
+      setIsNeedToReload(true);
+    };
+    const handleSetDelivered = async () => {
+      const id = props.row.id;
+      const sum = props.row.sum;
+      const address = props.row.address;
+      // console.log("props.row :>> ", props.row);
+      try {
+        const response = await axios.put(
+          `${urls.USER_ORDERS_URL}set_status/${id}/is_delivered/${sum}/${address}`,
           {
             headers: { "Content-Type": "application/json" },
           }
@@ -157,27 +177,38 @@ const Orders = () => {
           <TableCell>{row.email}</TableCell>
           <TableCell>{row.address}</TableCell>
           <TableCell>{row.sum}</TableCell>
+          <TableCell>{row.is_ready ? "ready" : "not ready yet"}</TableCell>
           <TableCell>
-            {row.is_ready ? (
-              "ready"
+            {row.is_delivering ? (
+              "delivering"
             ) : (
               <Button
                 variant="contained"
                 // color="error"
                 // value={selectedRow.id}
-                onClick={handleSetReady}
+                onClick={handleSetDelivering}
                 // sx={{ m: 1 }}
               >
-                set to ready
+                set to delivering
               </Button>
             )}
           </TableCell>
-          {/* <TableCell>
-            {row.is_delivering ? "delivering" : "not delivering yet"}
-          </TableCell>
+
           <TableCell>
-            {row.is_delivered ? "delivered" : "not delivered yet"}
-          </TableCell> */}
+            {row.is_delivered ? (
+              "delivered"
+            ) : (
+              <Button
+                variant="contained"
+                // color="error"
+                // value={selectedRow.id}
+                onClick={handleSetDelivered}
+                // sx={{ m: 1 }}
+              >
+                set to delivered
+              </Button>
+            )}
+          </TableCell>
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -211,13 +242,9 @@ const Orders = () => {
     );
   }
 
-  const sortedOrdersRows =
-    SQLtableDataOrdersRows?.length > 0
-      ? [...SQLtableDataOrdersRows].sort((a, b) => b.id - a.id)
-      : [];
-  const rows = sortedOrdersRows?.map((row) => createData(row));
-  // const rows = SQLtableDataOrdersRows?.map((row) => createData(row));
-
+  const rows = SQLtableDataOrdersRows?.map((row) => createData(row));
+  // console.log("SQLtableDataOrdersRows :>> ", SQLtableDataOrdersRows);
+  // console.log("positionsData :>> ", positionsData);
   //#endregion table
 
   return (
@@ -246,8 +273,8 @@ const Orders = () => {
                   <TableCell>Address</TableCell>
                   <TableCell>Sum</TableCell>
                   <TableCell>is_ready</TableCell>
-                  {/* <TableCell>is_delivering</TableCell> */}
-                  {/* <TableCell>is_delivered</TableCell> */}
+                  <TableCell>is_delivering</TableCell>
+                  <TableCell>is_delivered</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -264,4 +291,4 @@ const Orders = () => {
     </Box>
   );
 };
-export default Orders;
+export default Courier;

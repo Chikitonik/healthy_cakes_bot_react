@@ -19,7 +19,9 @@ const useFetchOrdersRows = () => {
       if (response?.data && response.data.length > 0) {
         const ordersData = response.data[0].ordersData;
         setSQLtableData(ordersData);
-        setOrdersRowsCount(ordersData.length);
+        setOrdersRowsCount(
+          ordersData.filter((order) => order.is_delivered === false).length
+        );
       } else {
         setErrMsg("No data");
       }

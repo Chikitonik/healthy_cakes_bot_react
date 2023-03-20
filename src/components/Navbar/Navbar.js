@@ -97,6 +97,12 @@ export default function Navbar() {
               </Button>
             )}
 
+            {(auth.role === 1 || auth.role === 3) && (
+              <Button color="inherit">
+                <Link to="/courier">courier</Link>
+              </Button>
+            )}
+
             {auth.role === 1 && (
               <Button color="inherit">
                 <Link to="/admin">Admin</Link>

@@ -138,9 +138,12 @@ const Orders = () => {
     );
   }
 
-  const rows = SQLtableDataOrdersRows?.map((row) => createData(row));
-  // console.log("SQLtableDataOrdersRows :>> ", SQLtableDataOrdersRows);
-  // console.log("positionsData :>> ", positionsData);
+  const sortedOrdersRows = [...SQLtableDataOrdersRows].sort(
+    (a, b) => b.id - a.id
+  );
+  const rows = sortedOrdersRows?.map((row) => createData(row));
+  // const rows = SQLtableDataOrdersRows?.map((row) => createData(row));
+
   //#endregion table
 
   return (
