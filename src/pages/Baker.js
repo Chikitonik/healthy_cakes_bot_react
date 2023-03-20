@@ -19,7 +19,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import FetchedTable from "../components/FetchedTable/FetchedTable";
 import Button from "@mui/material/Button";
 
-const Orders = () => {
+const Baker = () => {
   // const {
   //   SQLtableDataOrdersRows,
   //   setSQLtableDataOrdersRows,
@@ -264,4 +264,4 @@ const Orders = () => {
     </Box>
   );
 };
-export default Orders;
+export default Baker;

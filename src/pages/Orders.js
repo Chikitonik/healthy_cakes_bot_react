@@ -89,7 +89,10 @@ const Orders = () => {
     return (
       // <div key={row.id}>
       <React.Fragment key={row.id}>
-        <TableRow>
+        <TableRow
+          // className={row.is_delivered ? "delivered" : "not_delivered"}
+          sx={row.is_delivered ? { backgroundColor: "#c5c5c5" } : {}}
+        >
           <TableCell>
             <IconButton
               aria-label="expand row"
