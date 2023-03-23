@@ -27,6 +27,9 @@
     <li><ul>copy url from netlify.com and past to:</li>
         <li><ul>BotFather in Telegram:</li>
             <li>/setmenubutton</li>
+    <ul>example for store https://healthy-cakes-store.netlify.app/?source=telegram</ul>
+<ul>example for baker https://healthy-cakes-store.netlify.app/?source=telegram_baker</ul>
+<ul>example for courier https://healthy-cakes-store.netlify.app/?source=telegram_courier</ul>
             <li>@healthy_cakes_bot and other settings</li>
             </ul>
         <li>const <code>webAppUrl</code> in healthy_cakes_bot_<b>node</b>\index.js</li>
