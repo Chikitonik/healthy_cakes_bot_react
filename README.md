@@ -7,7 +7,10 @@
     <li>launch ngrok and send <code>ngrok http 3000</code></li>
     <li><ul>copy url from ngrok and past to:</li>
         <li><ul>BotFather in Telegram:</li>
-            <li>/setmenubutton</li>
+            <li>/setmenubutton  for all bots</li>
+            <ul>example for store https://dad5-2a0d-6fc2-4fa1-c400-891d-85db-5017-af5e.eu.ngrok.io/?source=telegram</ul>
+            <ul>example for baker https://dad5-2a0d-6fc2-4fa1-c400-891d-85db-5017-af5e.eu.ngrok.io/?source=telegram_baker</ul>
+            <ul>example for courier https://dad5-2a0d-6fc2-4fa1-c400-891d-85db-5017-af5e.eu.ngrok.io/?source=telegram_courier</ul>
             <li>@healthy_cakes_bot and other settings</li>
             </ul>
         <li>const <code>webAppUrl</code> in healthy_cakes_bot_<b>node</b>\index.js</li>
