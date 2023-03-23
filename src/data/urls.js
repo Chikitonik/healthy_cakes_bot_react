@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:8000";
+const baseUrl = "https://cakes-node.onrender.com";
 const urls = {
   REGISTER_URL: `${baseUrl}/register`,
   LOGIN_URL: `${baseUrl}/login`,
