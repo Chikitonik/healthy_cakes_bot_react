@@ -19,7 +19,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import FetchedTable from "../components/FetchedTable/FetchedTable";
 import Button from "@mui/material/Button";
 
-const Baker = () => {
+const Courier = () => {
   // const {
   //   SQLtableDataOrdersRows,
   //   setSQLtableDataOrdersRows,
@@ -35,7 +35,7 @@ const Baker = () => {
   const fetchSQLtableData = async () => {
     try {
       const response = await axios.get(
-        urls.ORDERS_ALL_URL + "false/false/false",
+        urls.ORDERS_ALL_URL + "true/true,false/false",
         {
           headers: { "Content-Type": "application/json" },
           // withCredentials: true,
@@ -118,14 +118,34 @@ const Baker = () => {
     const { row } = props;
     const [open, setOpen] = React.useState(false);
 
-    const handleSetReady = async () => {
+    const handleSetDelivering = async () => {
       const id = props.row.id;
       const sum = props.row.sum;
       const address = props.row.address;
       // console.log("props.row :>> ", props.row);
       try {
         const response = await axios.put(
-          `${urls.USER_ORDERS_URL}set_status/${id}/is_ready/${sum}/${address}`,
+          `${urls.USER_ORDERS_URL}set_status/${id}/is_delivering/${sum}/${address}`,
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+      } catch (err) {
+        console.log("err :>> ", err);
+        if (!err?.response) {
+          console.log("No Server Response");
+        }
+      }
+      setIsNeedToReload(true);
+    };
+    const handleSetDelivered = async () => {
+      const id = props.row.id;
+      const sum = props.row.sum;
+      const address = props.row.address;
+      // console.log("props.row :>> ", props.row);
+      try {
+        const response = await axios.put(
+          `${urls.USER_ORDERS_URL}set_status/${id}/is_delivered/${sum}/${address}`,
           {
             headers: { "Content-Type": "application/json" },
           }
@@ -153,31 +173,42 @@ const Baker = () => {
             </IconButton>
           </TableCell>
           <TableCell>{row.id}</TableCell>
-          <TableCell>{row.username}</TableCell>
-          <TableCell>{row.email}</TableCell>
+          {/* <TableCell>{row.username}</TableCell> */}
+          {/* <TableCell>{row.email}</TableCell> */}
           <TableCell>{row.address}</TableCell>
-          <TableCell>{row.sum}</TableCell>
+          {/* <TableCell>{row.sum}</TableCell> */}
+          {/* <TableCell>{row.is_ready ? "ready" : "not ready yet"}</TableCell> */}
           <TableCell>
-            {row.is_ready ? (
-              "ready"
+            {row.is_delivering ? (
+              "delivering"
             ) : (
               <Button
                 variant="contained"
                 // color="error"
                 // value={selectedRow.id}
-                onClick={handleSetReady}
+                onClick={handleSetDelivering}
                 // sx={{ m: 1 }}
               >
-                set to ready
+                set to delivering
               </Button>
             )}
           </TableCell>
-          {/* <TableCell>
-            {row.is_delivering ? "delivering" : "not delivering yet"}
-          </TableCell>
+
           <TableCell>
-            {row.is_delivered ? "delivered" : "not delivered yet"}
-          </TableCell> */}
+            {row.is_delivered ? (
+              "delivered"
+            ) : (
+              <Button
+                variant="contained"
+                // color="error"
+                // value={selectedRow.id}
+                onClick={handleSetDelivered}
+                // sx={{ m: 1 }}
+              >
+                set to delivered
+              </Button>
+            )}
+          </TableCell>
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -190,7 +221,6 @@ const Baker = () => {
                       <TableCell>cake title</TableCell>
                       <TableCell>price</TableCell>
                       <TableCell>amount</TableCell>
-                      <TableCell>image</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -199,15 +229,6 @@ const Baker = () => {
                         <TableCell>{itemsRow.title}</TableCell>
                         <TableCell>{itemsRow.price_with_discount}</TableCell>
                         <TableCell>{itemsRow.amount}</TableCell>
-                        <TableCell>
-                          <img
-                            src={itemsRow.image_source}
-                            alt={`Cake ${itemsRow.title}`}
-                            style={{
-                              height: 40,
-                            }}
-                          />
-                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -232,46 +253,48 @@ const Baker = () => {
 
   return (
     <Box
-      sx={{
-        p: 3,
-        // background: "#eeeeee",
-        // minHeight: "90vh",
-      }}
+    // sx={{
+    //   p: 3,
+    //   background: "#eeeeee",
+    //   minHeight: "90vh",
+    // }}
     >
-      <Paper elevation={3} sx={{ p: 2 }}>
-        <Typography variant="h6" sx={{ p: 1 }}>
-          Orders
-        </Typography>
+      {/* <Paper
+      elevation={3} sx={{ p: 2 }}
+      > */}
+      <Typography variant="h6" sx={{ p: 1 }}>
+        Orders
+      </Typography>
 
-        {SQLtableDataOrdersRows ? (
-          <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
-              <TableHead>
-                <TableRow>
-                  <TableCell />
-                  {/* <TableCell>Dessert (100g serving)</TableCell> */}
-                  <TableCell>Order number</TableCell>
-                  <TableCell>User</TableCell>
-                  <TableCell>Email</TableCell>
-                  <TableCell>Address</TableCell>
-                  <TableCell>Sum</TableCell>
-                  <TableCell>Ready to delivery</TableCell>
-                  {/* <TableCell>is_delivering</TableCell> */}
-                  {/* <TableCell>is_delivered</TableCell> */}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows.map((row) => (
-                  <Row key={row.name} row={row} />
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        ) : (
-          "orders is empty"
-        )}
-      </Paper>
+      {SQLtableDataOrdersRows ? (
+        <TableContainer component={Paper}>
+          <Table aria-label="collapsible table" padding="none" size="small">
+            <TableHead>
+              <TableRow>
+                <TableCell />
+                {/* <TableCell>Dessert (100g serving)</TableCell> */}
+                <TableCell>№</TableCell>
+                {/* <TableCell>User</TableCell> */}
+                {/* <TableCell>Email</TableCell> */}
+                <TableCell>Address</TableCell>
+                {/* <TableCell>Sum</TableCell> */}
+                {/* <TableCell>is_ready</TableCell> */}
+                <TableCell>is_delivering</TableCell>
+                <TableCell>is_delivered</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <Row key={row.name} row={row} />
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      ) : (
+        "orders is empty"
+      )}
+      {/* </Paper> */}
     </Box>
   );
 };
-export default Baker;
+export default Courier;

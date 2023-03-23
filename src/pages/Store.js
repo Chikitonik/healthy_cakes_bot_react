@@ -14,6 +14,7 @@ export const Store = () => {
           display: "flex",
           flexDirection: "row",
           flexWrap: "wrap",
+          backgroundColor: "#DCF9D7",
         }}
       >
         {SQLtableData.map((item) => (

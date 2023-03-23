@@ -142,23 +142,34 @@ export default function SignUp() {
   return (
     <>
       {success ? (
-        <section>
+        <Box
+          sx={{
+            marginTop: 18,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           <h1>Success!</h1>
-          <p>
-            <a href="#">Sign In</a>
-          </p>
-        </section>
+          {/* <Grid container justifyContent="flex-end"> */}
+          <Grid item>
+            <Link href="/login" variant="body2">
+              Sign in
+            </Link>
+          </Grid>
+          {/* </Grid> */}
+        </Box>
       ) : (
         <Container component="main" maxWidth="xs">
           <Box
             sx={{
-              marginTop: 8,
+              marginTop: 10,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
               <PersonAddIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
@@ -187,6 +198,7 @@ export default function SignUp() {
                       // ref={userRef}
                       onChange={(e) => setUser(e.target.value.toLowerCase())}
                       value={user}
+                      sx={{ bgcolor: "white" }}
                       label={
                         <label>
                           Username
@@ -212,6 +224,7 @@ export default function SignUp() {
                       id="email"
                       onChange={(e) => setEmail(e.target.value)}
                       value={email}
+                      sx={{ bgcolor: "white" }}
                       label={
                         <label>
                           Email Address
@@ -252,6 +265,7 @@ export default function SignUp() {
                         fullWidth
                         id="password"
                         type={showPassword ? "text" : "password"}
+                        sx={{ bgcolor: "white" }}
                         endAdornment={
                           <InputAdornment position="end">
                             <IconButton
@@ -298,6 +312,7 @@ export default function SignUp() {
                         fullWidth
                         id="confirm_pwd"
                         type={showPasswordMatch ? "text" : "password"}
+                        sx={{ bgcolor: "white" }}
                         endAdornment={
                           <InputAdornment position="end">
                             <IconButton
@@ -335,7 +350,7 @@ export default function SignUp() {
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link href="/login" variant="body2">
                     Already have an account? Sign in
                   </Link>
                 </Grid>

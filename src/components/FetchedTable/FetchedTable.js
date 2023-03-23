@@ -24,7 +24,13 @@ const FetchedTable = (props) => {
         "response?.data[0].SQLtableData >>",
         response?.data[0].SQLtableData
       );
-      setSQLtableData(response?.data[0].SQLtableData);
+      const sortedSQLtableData =
+        response?.data[0].SQLtableData?.length > 0
+          ? [...response?.data[0].SQLtableData].sort((a, b) => b.id - a.id)
+          : [];
+
+      setSQLtableData(sortedSQLtableData);
+      // setSQLtableData(response?.data[0].SQLtableData);
     } catch (err) {
       console.log("err :>> ", err);
       if (!err?.response) {
@@ -41,7 +47,7 @@ const FetchedTable = (props) => {
   if (SQLtableData && SQLtableData.length > 0) {
     const keys = Object.keys(SQLtableData[0]);
     keys.map((key) => {
-      columns.push({ field: key });
+      columns.push({ field: key, width: 150 });
     });
   }
 

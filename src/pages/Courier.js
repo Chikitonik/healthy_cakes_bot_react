@@ -177,7 +177,7 @@ const Courier = () => {
           <TableCell>{row.email}</TableCell>
           <TableCell>{row.address}</TableCell>
           <TableCell>{row.sum}</TableCell>
-          <TableCell>{row.is_ready ? "ready" : "not ready yet"}</TableCell>
+          {/* <TableCell>{row.is_ready ? "ready" : "not ready yet"}</TableCell> */}
           <TableCell>
             {row.is_delivering ? (
               "delivering"
@@ -221,6 +221,7 @@ const Courier = () => {
                       <TableCell>cake title</TableCell>
                       <TableCell>price</TableCell>
                       <TableCell>amount</TableCell>
+                      <TableCell>image</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -229,6 +230,15 @@ const Courier = () => {
                         <TableCell>{itemsRow.title}</TableCell>
                         <TableCell>{itemsRow.price_with_discount}</TableCell>
                         <TableCell>{itemsRow.amount}</TableCell>
+                        <TableCell>
+                          <img
+                            src={itemsRow.image_source}
+                            alt={`Cake ${itemsRow.title}`}
+                            style={{
+                              height: 40,
+                            }}
+                          />
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -255,8 +265,8 @@ const Courier = () => {
     <Box
       sx={{
         p: 3,
-        background: "#eeeeee",
-        height: "90vh",
+        // background: "#eeeeee",
+        // minHeight: "90vh",
       }}
     >
       <Paper elevation={3} sx={{ p: 2 }}>
@@ -276,9 +286,9 @@ const Courier = () => {
                   <TableCell>Email</TableCell>
                   <TableCell>Address</TableCell>
                   <TableCell>Sum</TableCell>
-                  <TableCell>is_ready</TableCell>
-                  <TableCell>is_delivering</TableCell>
-                  <TableCell>is_delivered</TableCell>
+                  {/* <TableCell>is_ready</TableCell> */}
+                  <TableCell>In delivery</TableCell>
+                  <TableCell>Delivered</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

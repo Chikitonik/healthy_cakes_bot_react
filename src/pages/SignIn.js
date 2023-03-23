@@ -2,7 +2,7 @@ import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-// import Link from "@mui/material/Link";
+import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -22,7 +22,7 @@ import md5 from "md5";
 
 import { useState, useEffect, useContext, useRef } from "react";
 import useAuth from "../hooks/useAuth";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 
 import urls from "../data/urls";
@@ -124,6 +124,7 @@ export default function SignIn() {
         setPwd("");
         setSuccess(true);
         navigate(from, { replace: true });
+        window.location.reload();
       }
     } catch (err) {
       console.log("err :>> ", err);
@@ -143,13 +144,13 @@ export default function SignIn() {
     <Container component="main" maxWidth="xs">
       <Box
         sx={{
-          marginTop: 8,
+          marginTop: 10,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+        <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
           <LockOpenIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
@@ -174,6 +175,7 @@ export default function SignIn() {
                 onChange={(e) => setUser(e.target.value.toLowerCase())}
                 value={user}
                 label="Username"
+                sx={{ bgcolor: "white" }}
               />
               {/* </Tooltip> */}
             </Grid>
@@ -221,6 +223,7 @@ export default function SignIn() {
                   fullWidth
                   id="password"
                   type={showPassword ? "text" : "password"}
+                  sx={{ bgcolor: "white" }}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
@@ -238,52 +241,6 @@ export default function SignIn() {
                 {/* </Tooltip> */}
               </FormControl>
             </Grid>
-            {/* <Grid item xs={12}>
-                  <FormControl sx={{ width: "100%" }} variant="outlined">
-                    <InputLabel htmlFor="confirm_pwd">
-                      Confirm password
-                      {validMatch && pwd ? (
-                        <CheckIcon color="success" fontSize="20px" />
-                      ) : (
-                        " *"
-                      )}
-                    </InputLabel>
-                    <Tooltip
-                      disableHoverListener
-                      title={
-                        !validMatch &&
-                        "Must match the first password input field"
-                      }
-                      placement="bottom-start"
-                    >
-                      <OutlinedInput
-                        value={matchPwd}
-                        name="confirm_pwd"
-                        onChange={(e) => setMatchPwd(e.target.value)}
-                        fullWidth
-                        id="confirm_pwd"
-                        type={showPasswordMatch ? "text" : "password"}
-                        endAdornment={
-                          <InputAdornment position="end">
-                            <IconButton
-                              aria-label="toggle password visibility"
-                              onClick={handleClickShowPasswordMatch}
-                              onMouseDown={handleMouseDownPassword}
-                              edge="end"
-                            >
-                              {showPasswordMatch ? (
-                                <VisibilityOff />
-                              ) : (
-                                <Visibility />
-                              )}
-                            </IconButton>
-                          </InputAdornment>
-                        }
-                        label="Confirm password"
-                      />
-                    </Tooltip>
-                  </FormControl>
-                </Grid> */}
           </Grid>
           <Button
             // disabled={
@@ -298,13 +255,13 @@ export default function SignIn() {
           >
             Sign In
           </Button>
-          {/* <Grid container justifyContent="flex-end">
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    Already have an account? Sign in
-                  </Link>
-                </Grid>
-              </Grid> */}
+          <Grid container justifyContent="flex-end">
+            <Grid item>
+              <Link href="/register" variant="body2">
+                Don't have an account? Sign up
+              </Link>
+            </Grid>
+          </Grid>
         </Box>
       </Box>
     </Container>

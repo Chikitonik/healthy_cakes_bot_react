@@ -82,8 +82,8 @@ export const Settings = () => {
 
   const [isEditingAddress, setIsEditingAddress] = useState(false);
   const [editRowIndex, setEditRowIndex] = useState(-1);
-  console.log("isEditingAddress :>> ", isEditingAddress);
-  console.log("editRowIndex :>> ", editRowIndex);
+  // console.log("isEditingAddress :>> ", isEditingAddress);
+  // console.log("editRowIndex :>> ", editRowIndex);
 
   const handleEditClickAddress = (index) => {
     console.log("index :>> ", index);
@@ -128,7 +128,12 @@ export const Settings = () => {
           }
         );
       } catch (err) {
-        console.log("err :>> ", err);
+        // console.log("err :>> ", err);
+        if (err.response.data.error.includes("referenced")) {
+          alert(
+            "Unable to delete, because there is an order with this address id"
+          );
+        }
         if (!err?.response) {
           setErrMsg("No Server Response");
         }
@@ -162,8 +167,8 @@ export const Settings = () => {
     <Box
       sx={{
         p: 3,
-        background: "#eeeeee",
-        height: "90vh",
+        // background: "#DCF9D7",
+        // minHeight: "97vh",
       }}
     >
       <Paper elevation={3} sx={{ p: 2 }}>

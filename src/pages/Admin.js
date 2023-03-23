@@ -56,10 +56,10 @@ const Admin = () => {
     <Box
       sx={{
         flexGrow: 1,
-        bgcolor: "background.paper",
+        // bgcolor: "background.paper",
         display: "flex",
-        background: "#eeeeee",
-        height: "90vh",
+        // background: "#eeeeee",
+        // minHeights: "90vh",
       }}
     >
       <Tabs
@@ -70,7 +70,7 @@ const Admin = () => {
         sx={{
           borderRight: 3,
           borderColor: "divider",
-          bgcolor: "background.paper",
+          // bgcolor: "background.paper",
           minWidth: 200,
         }}
       >

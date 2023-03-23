@@ -10,6 +10,7 @@ const urls = {
   USER_ORDERS_POSITION_URL: `${baseUrl}/orders_position/`,
   USER_CART_COUNT_URL: `${baseUrl}/cart/count/`,
   USER_SETTINGS: `${baseUrl}/settings/`,
+  TELEGRAM_ORDER_CREATE: `${baseUrl}/telegram_order_create/`,
   // --
   // REGISTER_URL: "https://cakes-node.onrender.com/register",
   // LOGIN_URL: "https://cakes-node.onrender.com/login",

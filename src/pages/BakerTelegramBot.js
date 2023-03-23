@@ -153,8 +153,8 @@ const Baker = () => {
             </IconButton>
           </TableCell>
           <TableCell>{row.id}</TableCell>
-          <TableCell>{row.username}</TableCell>
-          <TableCell>{row.email}</TableCell>
+          {/* <TableCell>{row.username}</TableCell> */}
+          {/* <TableCell>{row.email}</TableCell> */}
           <TableCell>{row.address}</TableCell>
           <TableCell>{row.sum}</TableCell>
           <TableCell>
@@ -190,7 +190,6 @@ const Baker = () => {
                       <TableCell>cake title</TableCell>
                       <TableCell>price</TableCell>
                       <TableCell>amount</TableCell>
-                      <TableCell>image</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -199,15 +198,6 @@ const Baker = () => {
                         <TableCell>{itemsRow.title}</TableCell>
                         <TableCell>{itemsRow.price_with_discount}</TableCell>
                         <TableCell>{itemsRow.amount}</TableCell>
-                        <TableCell>
-                          <img
-                            src={itemsRow.image_source}
-                            alt={`Cake ${itemsRow.title}`}
-                            style={{
-                              height: 40,
-                            }}
-                          />
-                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -232,45 +222,45 @@ const Baker = () => {
 
   return (
     <Box
-      sx={{
-        p: 3,
-        // background: "#eeeeee",
-        // minHeight: "90vh",
-      }}
+    // sx={{
+    //   p: 3,
+    //   background: "#eeeeee",
+    //   height: "90vh",
+    // }}
     >
-      <Paper elevation={3} sx={{ p: 2 }}>
-        <Typography variant="h6" sx={{ p: 1 }}>
-          Orders
-        </Typography>
+      {/* <Paper elevation={3} sx={{ p: 2 }}> */}
+      <Typography variant="h6" sx={{ p: 1 }}>
+        Orders
+      </Typography>
 
-        {SQLtableDataOrdersRows ? (
-          <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
-              <TableHead>
-                <TableRow>
-                  <TableCell />
-                  {/* <TableCell>Dessert (100g serving)</TableCell> */}
-                  <TableCell>Order number</TableCell>
-                  <TableCell>User</TableCell>
-                  <TableCell>Email</TableCell>
-                  <TableCell>Address</TableCell>
-                  <TableCell>Sum</TableCell>
-                  <TableCell>Ready to delivery</TableCell>
-                  {/* <TableCell>is_delivering</TableCell> */}
-                  {/* <TableCell>is_delivered</TableCell> */}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows.map((row) => (
-                  <Row key={row.name} row={row} />
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        ) : (
-          "orders is empty"
-        )}
-      </Paper>
+      {SQLtableDataOrdersRows ? (
+        <TableContainer component={Paper}>
+          <Table aria-label="collapsible table">
+            <TableHead>
+              <TableRow>
+                <TableCell />
+                {/* <TableCell>Dessert (100g serving)</TableCell> */}
+                <TableCell>№</TableCell>
+                {/* <TableCell>User</TableCell> */}
+                {/* <TableCell>Email</TableCell> */}
+                <TableCell>Address</TableCell>
+                <TableCell>Sum</TableCell>
+                <TableCell>is_ready</TableCell>
+                {/* <TableCell>is_delivering</TableCell> */}
+                {/* <TableCell>is_delivered</TableCell> */}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <Row key={row.name} row={row} />
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      ) : (
+        "orders is empty"
+      )}
+      {/* </Paper> */}
     </Box>
   );
 };

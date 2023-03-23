@@ -41,16 +41,37 @@ const Cart = () => {
         (value) => value.id === element.cake_id
       )[0].title;
     });
+    SQLtableDataCartRows.forEach((element) => {
+      const url = SQLtableData.filter(
+        (value) => value.id === element.cake_id
+      )[0].image_source;
+      element.image_source = url;
+    });
   }
 
   const columns = [
-    { field: "title", headerName: "title", width: 250 },
+    { field: "title", headerName: "Title", width: 250 },
     {
       field: "price_with_discount",
-      headerName: "price",
+      headerName: "Price",
       width: 100,
     },
-    { field: "amount", headerName: "amount", width: 100 },
+    { field: "amount", headerName: "Amount", width: 100 },
+    {
+      field: "image_source",
+      headerName: "Image",
+      width: 100,
+      renderCell: (params) => (
+        <img
+          src={params.value}
+          alt={`Cake ${params.row.title}`}
+          style={{
+            //  width: "100%",
+            height: "100%",
+          }}
+        />
+      ),
+    },
   ];
 
   const [selectionModel, setSelectionModel] = React.useState([]);
@@ -127,8 +148,8 @@ const Cart = () => {
     <Box
       sx={{
         p: 3,
-        background: "#eeeeee",
-        height: "90vh",
+        // background: "#DCF9D7",
+        // minHeight: "100vh",
       }}
     >
       <Paper
@@ -170,14 +191,7 @@ const Cart = () => {
         <Button variant="contained" sx={{ m: 1 }}>
           <Link to="/settings">go to setting to add a new address</Link>
         </Button>
-        <Button
-          variant="contained"
-          onClick={handlePlaceOrder}
-          disabled={(true && !totalSum > 0) || valueAddress === ""}
-          sx={{ m: 1 }}
-        >
-          Place your order for {totalSum} $
-        </Button>
+
         {SQLtableDataCartRows ? (
           <DataGrid
             autoHeight={true}
@@ -197,6 +211,14 @@ const Cart = () => {
         ) : (
           "cart is empty"
         )}
+        <Button
+          variant="contained"
+          onClick={handlePlaceOrder}
+          disabled={(true && !totalSum > 0) || valueAddress === ""}
+          sx={{ m: 1 }}
+        >
+          Place your order for &nbsp;<b>{totalSum} $</b>
+        </Button>
       </Paper>
     </Box>
   );

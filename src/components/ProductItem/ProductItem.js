@@ -16,9 +16,9 @@ const ProductItem = ({ product, className, onAdd, onShowDescription }) => {
     onShowDescription(product);
   };
 
-  const ProductData = ({ src, alt, title, price }) => {
+  const ProductData = ({ src, alt, title, price, discount }) => {
     return (
-      <>
+      <div key={product.id}>
         <CardMedia
           component="img"
           height="150"
@@ -40,9 +40,24 @@ const ProductItem = ({ product, className, onAdd, onShowDescription }) => {
           component="div"
           align="center"
         >
-          {"$ " + price}
+          {product.discount > 0 ? (
+            <div
+              style={{ display: "flex", justifyContent: "center", gap: "5px" }}
+            >
+              <Typography
+                variant="body1"
+                sx={{ textDecorationLine: "line-through" }}
+              >
+                {product.price}
+              </Typography>
+              {" $ "}
+              {Math.floor(product.price * (100 - product.discount)) / 100}
+            </div>
+          ) : (
+            "$ " + price
+          )}
         </Typography>
-      </>
+      </div>
     );
   };
 
@@ -61,15 +76,18 @@ const ProductItem = ({ product, className, onAdd, onShowDescription }) => {
 
   return (
     <Card className={"product " + className}>
-      <CardActionArea onClick={onShowDescriptionHandler}>
+      <CardActionArea
+      // onClick={onShowDescriptionHandler}
+      >
         {product.isShowDescription ? (
           <ProductDescription description={product.description} />
         ) : (
           <ProductData
-            src={product.src}
+            src={product.image_source}
             alt={product.title}
             title={product.title}
             price={product.price}
+            discount={product.discount}
           />
         )}
       </CardActionArea>

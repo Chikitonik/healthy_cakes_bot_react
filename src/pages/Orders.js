@@ -120,6 +120,7 @@ const Orders = () => {
                       <TableCell>cake title</TableCell>
                       <TableCell>price</TableCell>
                       <TableCell>amount</TableCell>
+                      <TableCell>image</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -128,6 +129,15 @@ const Orders = () => {
                         <TableCell>{itemsRow.title}</TableCell>
                         <TableCell>{itemsRow.price_with_discount}</TableCell>
                         <TableCell>{itemsRow.amount}</TableCell>
+                        <TableCell>
+                          <img
+                            src={itemsRow.image_source}
+                            alt={`Cake ${itemsRow.title}`}
+                            style={{
+                              height: 40,
+                            }}
+                          />
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -153,8 +163,8 @@ const Orders = () => {
     <Box
       sx={{
         p: 3,
-        background: "#eeeeee",
-        height: "90vh",
+        // background: "#DCF9D7",
+        // minHeight: "100vh",
       }}
     >
       <Paper elevation={3} sx={{ p: 2 }}>

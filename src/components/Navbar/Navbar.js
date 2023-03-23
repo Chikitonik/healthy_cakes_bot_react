@@ -47,7 +47,7 @@ export default function Navbar() {
               variant="h6"
               noWrap
               component="a"
-              href="/"
+              href="/store"
               sx={{
                 mr: 5,
                 //   display: { xs: "none", md: "flex" },
