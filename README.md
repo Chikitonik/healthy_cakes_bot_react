@@ -41,3 +41,9 @@
 ### Web Apps for Bots description:
 
 <p>https://core.telegram.org/bots/webapps </p>
+admin
+customer
+baker
+courier1
+
+qW1@1111
